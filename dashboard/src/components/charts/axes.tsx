@@ -5,9 +5,6 @@ import {
   LinearScale,
   PointElement,
   LineElement,
-  Title,
-  Tooltip,
-  Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
@@ -16,9 +13,6 @@ ChartJS.register(
   LinearScale,
   PointElement,
   LineElement,
-  Title,
-  Tooltip,
-  Legend
 );
 
 export const options = {
@@ -34,7 +28,7 @@ export const options = {
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const labels = [''];
 
 export const data = {
   labels,
@@ -48,6 +42,6 @@ export const data = {
   ],
 };
 
-export function AxesChart() {
+export function AxesChart(props) {
   return <Line options={options} data={data} />;
 }

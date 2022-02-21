@@ -32,10 +32,7 @@ services:
     networks:
       - guide-wheel
     depends_on:
-      api-rest:
-        condition: service_healthy
-    environment:
-      - HOST=http://api-rest:3000
+      - "api-rest"
 
   broker:
     image: toke/mosquitto

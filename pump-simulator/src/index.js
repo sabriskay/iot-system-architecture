@@ -20,7 +20,7 @@ function readCsv (path) {
     client.on('connect', function () {
         setInterval(() => {
             client.publish(`demo_ca1_t_axm`, JSON.stringify(pumpData.shift()));
-        }, 50);
+        }, 10);
     });
 })();
 

@@ -83,3 +83,12 @@ const MAPPINGS = {
 
 })();
 
+/**
+select 
+   (select min(value) FROM datapoint WHERE timestamp BETWEEN dd AND dd + interval '1' minute ) as min,
+   (select max(value) FROM datapoint WHERE timestamp BETWEEN dd AND dd + interval '1' minute ) as max,
+   dd as period
+from 
+   generate_series ('2018-08-20 00:00'::timestamp, '2018-08-21 00:00'::timestamp, '1 minute'::interval) dd;
+ */
+

@@ -1,7 +1,7 @@
 import './App.css';
 import MachineList from './components/Machine/MachineList';
 
-import mqtt from 'mqtt';
+//import mqtt from 'mqtt';
 
 /*var options = {
 	protocol: 'mqtts',
