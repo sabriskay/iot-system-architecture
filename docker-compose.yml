@@ -1,0 +1,98 @@
+version: "3.9"
+
+services:
+
+  api-rest:
+    build:
+      context: ./api-rest
+    volumes:
+      - ./api-rest/src:/home/node/app/src
+    ports:
+      - "3000:3000"
+    networks:
+      - guide-wheel
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DATABASE: guide_wheel
+      POSTGRES_PORT: 5432
+    depends_on:
+      db:
+        condition: service_healthy
+    entrypoint: [ "yarn", "start:dev" ]
+
+  dashboard:
+    build:
+      context: ./dashboard
+    volumes:
+      - ./dashboard/src:/home/node/app/src
+    ports:
+      - "3001:3000"
+    networks:
+      - guide-wheel
+    depends_on:
+      api-rest:
+        condition: service_healthy
+    environment:
+      - HOST=http://api-rest:3000
+
+  broker:
+    image: toke/mosquitto
+    networks:
+      - guide-wheel
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+
+  db:
+    image: postgres
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "${POSTGRES_DB}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    networks:
+      - guide-wheel
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+      POSTGRES_DB: guide_wheel
+
+  adminer:
+    image: adminer
+    restart: always
+    networks:
+      - guide-wheel
+    ports:
+      - 8081:8080
+    depends_on:
+      - "db"
+
+  pump-simulator:
+    build:
+      context: ./pump-simulator
+    volumes:
+      - ./pump-simulator/src:/home/node/app/src
+    networks:
+      - guide-wheel
+    depends_on:
+      - "broker"
+  
+  data-parser:
+    build:
+      context: ./data-parser
+    environment:
+      - HOST=http://api-rest:3000
+    volumes:
+      - ./data-parser/src:/home/node/app/src
+    networks:
+      - guide-wheel
+    depends_on:
+      - "api-rest"
+      - "pump-simulator"
+
+
+networks:
+  guide-wheel:
