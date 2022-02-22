@@ -1,5 +1,7 @@
 import './App.css';
 import Home from './views/Home/Home';
+import { useInterpret } from '@xstate/react'
+import * as DataPointsMachine from './machines/DataPoints';
 
 //import mqtt from 'mqtt';
 
@@ -18,12 +20,15 @@ client.on('message', function (topic, message) {
 });*/
 
 function App() {
+  const dataPoints = useInterpret(DataPointsMachine.machine);
+
   return (
-    <div className="App">
-      <header className="App-header">
+    <DataPointsMachine.context.Provider value={{ dataPoints }}>
+      <div className="App">
         <Home/>
-      </header>
-    </div>
+      </div>
+    </DataPointsMachine.context.Provider>
+
   );
 }
 

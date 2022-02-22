@@ -1,19 +1,16 @@
 import React from "react";
 import MetricPage from "../Metric/MetricPage";
-import FilterPage from "../Filter/FilterPage";
-import { Paper, Box } from '@mui/material';
+import ResponsiveDrawer from '../Header/Header';
 
 export default function Home () {
-  console.log('hola');
-
   return ( 
-    <div style={{ width: '90%', height: '100%' }}>
-      <Paper elevation={3}>
-        <Box>
-          <FilterPage/>
-          <MetricPage/>
-        </Box>
-      </Paper>
+    <div style={{ width: '95%', height: '95%', display: 'grid', gridTemplateRows: 'auto 1fr' }}>
+      <div style={{ position: 'absolute'}}>
+        <ResponsiveDrawer/>
+      </div>
+      <div style={{ width: '100%', display: 'grid' }}>
+        <MetricPage/>
+      </div>
     </div>
   );
 }

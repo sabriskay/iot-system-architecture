@@ -1,39 +1,64 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-  } from 'chart.js';
-import { Line } from 'react-chartjs-2';
-  
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-)
-
-const baseURL = `http://localhost:3000/historical-data/demo_ca1_t_axm`;
+import { Grid } from "@mui/material";
+import { LineChart } from '../Chart/LineChart';
+import * as DataPointsMachine from '../../machines/DataPoints';
+import { useActor } from '@xstate/react';
 
 export default function MetricsChart () {
-  const [sets, setSets] = useState({ mins: [], maxs: [], averages: [], periods: [] });
-  const [startDate, setStartDate] = useState(new Date('2018-08-20'));
+  const context = React.useContext(DataPointsMachine.context);
+  const [ state ] = useActor(context.dataPoints);
 
-  useEffect(
+  const data = {
+    labels: state.context.data_points.periods,
+    datasets: [
+      {
+        label: "Average",
+        data: state.context.data_points.averages,
+        fill: '-1',
+        borderColor: "rgba(0,0,255,1.0)",
+        pointRadius: 0,
+        backgroundColor: "rgba(0,0,255,1.0)",
+      },
+      {
+        label: "Min",
+        data: state.context.data_points.mins,
+        fill: '-1',
+        borderColor: "rgba(255,0,0,0.1)",
+        pointRadius: 0,
+      },
+      {
+        label: "Max",
+        data: state.context.data_points.maxs,
+        fill: '-1',
+        borderColor: "rgba(0,255,0,0.1)",
+        pointRadius: 0,
+      }
+    ]
+  };
+
+  return (        
+    <Grid container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <LineChart data={data} style={{ minHeight: '40vh' }}/> 
+    </Grid>);
+}
+
+
+
+
+/**
+ *   useEffect(
     async () => {
       const response = await axios.get(baseURL, {
         params: {
           start_date: startDate,
-          end_date: new Date(startDate.getTime() + 86400000)
+          end_date: new Date(startDate.getTime() + 86400000),
+          interval: 10,
+          intervalType: 'minute'
         }
       });
 
@@ -43,32 +68,5 @@ export default function MetricsChart () {
         averages: response.data['averages'].map((value) => parseFloat(value)),
         periods: response.data['periods'].map((value) => new Date(value).getTime())
       });
-
   }, [ startDate ]);
-
-  const data = {
-    labels: sets.periods,
-    datasets: [
-      {
-        label: "Average",
-        data: sets.averages,
-        fill: true,
-        borderColor: "#742774"
-      },
-      {
-        label: "Mins",
-        data: sets.mins,
-        fill: false,
-        borderColor: "#FFF000"
-      },
-      {
-        label: "Maxs",
-        data: sets.maxs,
-        fill: false,
-        borderColor: "#000FFF"
-      }
-    ]
-  };
-
-  return (<Line data={data} /> );
-}
+ */

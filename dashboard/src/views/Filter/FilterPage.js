@@ -1,8 +1,7 @@
 import React from "react";
-import DatePickerStartEndDateFilterLayout from '../../components/layout/Filters/DatePicker/DatePickerFilterLayout';
-import DatePickerRealTimeFilterLayout from '../../components/layout/Filters/DatePicker/DatePickerFilterLayout';
+import DatePickerWeekFilterLayout from '../../components/layout/Filters/DatePicker/DatePickerFilterLayout';
 import MetricStatus from '../../components/layout/MetricStatus/MetricStatus';
-import { Grid, Container, FormControlLabel, FormGroup, Switch } from '@mui/material';
+import { Grid, Container, Divider, FormControlLabel, FormGroup, Switch } from '@mui/material';
 
 
 export default function FilterPage () {
@@ -17,10 +16,9 @@ export default function FilterPage () {
         boxFilter =
             <Grid>
                 <MetricStatus/>
-                <DatePickerRealTimeFilterLayout startDate={undefined}/>
             </Grid>
     } else {
-        boxFilter = <DatePickerStartEndDateFilterLayout startDate={new Date('2018-08-20')}/>;
+        boxFilter = <DatePickerWeekFilterLayout startDate={new Date('2018-08-20')}/>;
     }
     return (
         <Container>
