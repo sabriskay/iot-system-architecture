@@ -1,5 +1,5 @@
 import './App.css';
-import MachineList from './components/Machine/MachineList';
+import Home from './views/Home/Home';
 
 //import mqtt from 'mqtt';
 
@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <MachineList/>
+        <Home/>
       </header>
     </div>
   );

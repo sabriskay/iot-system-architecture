@@ -10,7 +10,7 @@ import {
     Tooltip,
     Legend,
   } from 'chart.js';
-import { Line } from 'react-chartjs-2'; 
+import { Line } from 'react-chartjs-2';
   
 ChartJS.register(
   CategoryScale,
@@ -24,7 +24,7 @@ ChartJS.register(
 
 const baseURL = `http://localhost:3000/historical-data/demo_ca1_t_axm`;
 
-export default function MachineList () {
+export default function MetricsChart () {
   const [sets, setSets] = useState({ mins: [], maxs: [], averages: [], periods: [] });
   const [startDate, setStartDate] = useState(new Date('2018-08-20'));
 
@@ -70,9 +70,5 @@ export default function MachineList () {
     ]
   };
 
-  return ( 
-    <div style={{ width: '100%', height: '100%' }}>
-        <Line data={data} />
-    </div>
-  );
+  return (<Line data={data} /> );
 }
