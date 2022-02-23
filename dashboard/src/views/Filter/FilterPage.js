@@ -1,7 +1,7 @@
 import React from "react";
 import DatePickerWeekFilterLayout from '../../components/layout/Filters/DatePicker/DatePickerFilterLayout';
 import MetricStatus from '../../components/layout/MetricStatus/MetricStatus';
-import { Grid, Container, Divider, FormControlLabel, FormGroup, Switch } from '@mui/material';
+import { Grid, Container, FormControlLabel, FormGroup, Switch } from '@mui/material';
 
 
 export default function FilterPage () {

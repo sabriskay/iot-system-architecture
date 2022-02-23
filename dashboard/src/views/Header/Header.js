@@ -47,7 +47,6 @@ function ResponsiveDrawer() {
     const drawer = (
         <div>
             <List>
-                
                 <FilterPage/>
             </List>
         </div>
@@ -77,8 +76,8 @@ function ResponsiveDrawer() {
 
                 <Drawer
                     variant="temporary"
-                    anchor={theme.direction === 'rtl' ? 'right' : 'left'}
                     open={open}
+                    disableEnforceFocus
                     onClose={handleDrawerToggle}
                     classes={{
                         paper: classes.drawerPaper,
