@@ -2,12 +2,12 @@ import React from "react";
 import CalendarPickerWeek from 'src/components/DatePicker/CalendarPickerWeek';
 import FormControlSelect from 'src/components/FormControl/FormControlSelect'
 import { Divider, Grid, Typography } from "@mui/material";
-import * as DataPointsMachine from 'src/machines/DataPoints';
+import * as HistoricalDataPointsMachine from 'src/machines/HistoricalDataPoints';
 
 export default function DatePickerFilterLayout () {
 
-    const context = React.useContext(DataPointsMachine.context);
-    const { send } = context.dataPoints;
+    const context = React.useContext(HistoricalDataPointsMachine.context);
+    const { send } = context.historicalDataPoints;
 
     const handleChangeIntervalType = (value) =>{
         send({ type: 'UPDATE', interval_type: value });
@@ -38,10 +38,10 @@ export default function DatePickerFilterLayout () {
             <Grid spacing={4} container direction="column" justifyContent="center">
                 <Grid item style={{ width: '100%' }}>
                     <Divider/>
-                    <FormControlSelect title={'Interval Type'} options={intervalTypeOptions} onSelectChange={handleChangeIntervalType}/>
+                    <FormControlSelect title={'Interval Type'} selectOptions={intervalTypeOptions} onSelectChange={handleChangeIntervalType}/>
                 </Grid>
                 <Grid item style={{ width: '100%' }}>
-                    <FormControlSelect title={'Interval Options'} options={intervalOptions} onSelectChange={handleChangeInterval}/>
+                    <FormControlSelect title={'Interval Options'} selectOptions={intervalOptions} onSelectChange={handleChangeInterval}/>
                 </Grid>
             </Grid>
         </Grid>

@@ -307,6 +307,9 @@ module.exports = function (webpackEnv) {
       extensions: paths.moduleFileExtensions
         .map(ext => `.${ext}`)
         .filter(ext => useTypeScript || !ext.includes('ts')),
+      fallback: {
+          "buffer": require.resolve("buffer")
+      },
       alias: {
         src: path.resolve(__dirname, '../src/'),
         // Support React Native Web
@@ -562,6 +565,13 @@ module.exports = function (webpackEnv) {
       ].filter(Boolean),
     },
     plugins: [
+    
+      // Work around for Buffer is undefined:
+      // https://github.com/webpack/changelog-v5/issues/10
+      new webpack.ProvidePlugin({
+        Buffer: ['buffer', 'Buffer'],
+      }),
+    
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(

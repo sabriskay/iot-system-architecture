@@ -1,7 +1,8 @@
 import './App.css';
 import Home from './views/Home/Home';
 import { useInterpret } from '@xstate/react'
-import * as DataPointsMachine from './machines/DataPoints';
+import * as HistoricalDataPointsMachine from './machines/HistoricalDataPoints';
+//ºimport * as RealTimeDataPointsMachine from './machines/RealTimeDataPoints';
 
 //import mqtt from 'mqtt';
 
@@ -20,14 +21,15 @@ client.on('message', function (topic, message) {
 });*/
 
 function App() {
-  const dataPoints = useInterpret(DataPointsMachine.machine);
+  const historicalDataPoints = useInterpret(HistoricalDataPointsMachine.machine);
+  //const realTimeDataPoints = useInterpret(RealTimeDataPointsMachine.machine);
 
   return (
-    <DataPointsMachine.context.Provider value={{ dataPoints }}>
+    <HistoricalDataPointsMachine.context.Provider value={{ historicalDataPoints }}>
       <div className="App">
         <Home/>
       </div>
-    </DataPointsMachine.context.Provider>
+    </HistoricalDataPointsMachine.context.Provider>
 
   );
 }

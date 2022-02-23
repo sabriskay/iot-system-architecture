@@ -60,7 +60,7 @@ export const machine = createMachine({
         UPDATE: {
           target: 'fetching',
           actions: [
-            (context, event) => { console.log(context, event) },
+            (context, event) => { },
             assign({ 
               start_date: (context, event) => event.start_date || context.start_date,
               end_date: (context, event) => event.end_date || context.end_date,

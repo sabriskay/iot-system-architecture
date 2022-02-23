@@ -5,7 +5,7 @@ import ResponsiveDrawer from '../Header/Header';
 export default function Home () {
   return ( 
     <div style={{ width: '95%', height: '95%', display: 'grid', gridTemplateRows: 'auto 1fr' }}>
-      <div style={{ position: 'absolute'}}>
+      <div>
         <ResponsiveDrawer/>
       </div>
       <div style={{ width: '100%', display: 'grid' }}>

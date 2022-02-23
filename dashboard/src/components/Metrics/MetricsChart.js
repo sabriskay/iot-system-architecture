@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Grid } from "@mui/material";
 import { LineChart } from '../Chart/LineChart';
-import * as DataPointsMachine from 'src/machines/DataPoints';
+import * as HistoricalDataPointsMachine from 'src/machines/HistoricalDataPoints';
 import { useActor } from '@xstate/react';
 
 export default function MetricsChart () {
-  const context = React.useContext(DataPointsMachine.context);
-  const [ state ] = useActor(context.dataPoints);
+  const context = React.useContext(HistoricalDataPointsMachine.context);
+  const [ state ] = useActor(context.historicalDataPoints);
 
   const data = {
     labels: state.context.data_points.periods,
@@ -14,7 +14,6 @@ export default function MetricsChart () {
       {
         label: "Average",
         data: state.context.data_points.averages,
-        fill: '-1',
         borderColor: "rgba(0,0,255,1.0)",
         pointRadius: 0,
         backgroundColor: "rgba(0,0,255,1.0)",
@@ -22,14 +21,12 @@ export default function MetricsChart () {
       {
         label: "Min",
         data: state.context.data_points.mins,
-        fill: '-1',
         borderColor: "rgba(255,0,0,0.1)",
         pointRadius: 0,
       },
       {
         label: "Max",
         data: state.context.data_points.maxs,
-        fill: '-1',
         borderColor: "rgba(0,255,0,0.1)",
         pointRadius: 0,
       }

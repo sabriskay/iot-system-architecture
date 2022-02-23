@@ -1,7 +1,7 @@
 import React from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-export default function FormControlSelect ({ options, title, onSelectChange }) {
+export default function FormControlSelect ({ selectOptions, title, onSelectChange }) {
 
     const [ value, setValue ] = React.useState("");
 
@@ -14,8 +14,10 @@ export default function FormControlSelect ({ options, title, onSelectChange }) {
     }
 
     React.useEffect(() => {
-        setValue(options[0])
-    }, [0]);
+        if (selectOptions && selectOptions > 0) {
+            setValue(selectOptions[0])
+        }
+    }, [selectOptions]);
 
     return (
         <FormControl style={{ width: '100%' }}>
@@ -26,7 +28,7 @@ export default function FormControlSelect ({ options, title, onSelectChange }) {
                 label={title}
                 onChange={onChange}
             >
-                { options.map((option, index) => {
+                { selectOptions.map((option, index) => {
                     return (
                         <MenuItem value={option} key={index}>{option}</MenuItem>
                     )

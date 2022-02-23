@@ -5,6 +5,9 @@ import {
   LinearScale,
   PointElement,
   LineElement,
+  Title,
+  Tooltip,
+  Legend
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
@@ -13,24 +16,10 @@ ChartJS.register(
   LinearScale,
   PointElement,
   LineElement,
+  Title,
+  Tooltip,
+  Legend
 );
-
-export const pluging = [{
-        afterLayout: c => {
-            console.log(c)
-          let dataset = c.data.datasets[0];
-          let yScale = c.scales['y-axis-0'];
-          let yBottom = yScale.getPixelForValue(0);
-          let yGradientStart = yScale.getPixelForValue(dataset.data.find(v => v > 0));
-          let yTop = yScale.getPixelForValue(Math.max(...dataset.data));
-          let gradientFill = c.ctx.createLinearGradient(0, yBottom, 0, yTop);
-          gradientFill.addColorStop(0, "#fff");
-          let offset = (yBottom - yGradientStart) / (yBottom - yTop); 
-          gradientFill.addColorStop(offset, "#fff");
-          gradientFill.addColorStop(1, "#7E0100");
-          dataset.backgroundColor = gradientFill;
-        }
-}];
 
 export const options = {
     responsive: true,
@@ -39,14 +28,11 @@ export const options = {
         mode: 'index',
     },
     plugins: {
-        filler: {
-            propagate: true,
-        },
         legend: {
             position: 'top',
         },
         title: {
-            display: false,
+            display: true,
             text: 'Compresor Status',
         },
         tooltip: {
@@ -140,5 +126,5 @@ export const options = {
 
 
 export function LineChart (props) {
-  return <Line options={options} plugings={pluging} data={props.data} />;
+  return <Line options={options} data={props.data} />;
 }
