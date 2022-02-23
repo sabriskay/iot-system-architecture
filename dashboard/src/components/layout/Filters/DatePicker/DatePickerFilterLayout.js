@@ -1,9 +1,11 @@
 import React from "react";
-import CalendarPickerWeek from '../../../DatePicker/CalendarPickerWeek';
+import CalendarPickerWeek from 'src/components/DatePicker/CalendarPickerWeek';
+import FormControlSelect from 'src/components/FormControl/FormControlSelect'
 import { Divider, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from "@mui/material";
-import * as DataPointsMachine from '../../../../machines/DataPoints';
+import * as DataPointsMachine from 'src/machines/DataPoints';
 
-export default function DatePickerFilterLayout (props) {
+export default function DatePickerFilterLayout () {
+
     const context = React.useContext(DataPointsMachine.context);
     const { send } = context.dataPoints;
     const [ intervalType, setIntervalType ] = React.useState('minute');
@@ -23,6 +25,9 @@ export default function DatePickerFilterLayout (props) {
         send({ type: 'UPDATE', start_date, end_date });
     }
 
+    const intervalOptions = [1, 2, 5, 10, 15, 13];
+    const intervalTypeOptions = ['second', 'minute', 'hour'];
+
     return (
         <Grid container
             spacing={0}
@@ -37,7 +42,8 @@ export default function DatePickerFilterLayout (props) {
             <Grid spacing={4} container direction="column" justifyContent="center">
                 <Grid item style={{ width: '100%' }}>
                 <Divider/>
-                    <FormControl style={{ width: '100%' }}>
+                    <FormControlSelect title={'Interval Type'} options={intervalTypeOptions} onSelectChange={handleChangeIntervalType}/>
+                    <FormControl>
                         <InputLabel id="demo-simple-select-label">Interval {intervalType}</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"

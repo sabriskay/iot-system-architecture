@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import { LineChart } from '../Chart/LineChart';
-import * as DataPointsMachine from '../../machines/DataPoints';
+import * as DataPointsMachine from 'src/machines/DataPoints';
 import { useActor } from '@xstate/react';
 
 export default function MetricsChart () {
