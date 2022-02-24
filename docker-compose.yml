@@ -17,9 +17,9 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DATABASE: guide_wheel
       POSTGRES_PORT: 5432
+      POSTGRES_DB: guide_wheel
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     entrypoint: [ "yarn", "start:dev" ]
 
   dashboard:
@@ -44,11 +44,6 @@ services:
 
   db:
     image: postgres
-    healthcheck:
-      test: ["CMD", "pg_isready", "-q", "-d", "${POSTGRES_DB}" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
     restart: always
     networks:
       - guide-wheel

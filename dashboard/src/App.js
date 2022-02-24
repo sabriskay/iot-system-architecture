@@ -2,7 +2,7 @@ import './App.css';
 import Home from './views/Home/Home';
 import { useInterpret } from '@xstate/react'
 import * as HistoricalDataPointsMachine from './machines/HistoricalDataPoints';
-//ºimport * as RealTimeDataPointsMachine from './machines/RealTimeDataPoints';
+//import * as RealTimeDataPointsMachine from './machines/RealTimeDataPoints';
 
 //import mqtt from 'mqtt';
 
