@@ -14,7 +14,7 @@ export default function FormControlSelect ({ selectOptions, title, onSelectChang
     }
 
     React.useEffect(() => {
-        if (selectOptions && selectOptions > 0) {
+        if (selectOptions && selectOptions.length > 0) {
             setValue(selectOptions[0])
         }
     }, [selectOptions]);

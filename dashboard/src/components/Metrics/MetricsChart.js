@@ -27,7 +27,8 @@ export default function MetricsChart () {
       {
         label: "Max",
         data: state.context.data_points.maxs,
-        borderColor: "rgba(0,255,0,0.1)",
+        borderColor: "rgba(178,194,72,0.5)",
+        backgroundColor: "rgba(178,194,72,1)",
         pointRadius: 0,
       }
     ]

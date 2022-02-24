@@ -28,12 +28,15 @@ export const options = {
         mode: 'index',
     },
     plugins: {
+        filler: {
+            propagate: true,
+        },
         legend: {
             position: 'top',
         },
         title: {
             display: true,
-            text: 'Compresor Status',
+            text: '',
         },
         tooltip: {
             callbacks: {
@@ -108,11 +111,11 @@ export const options = {
                 lineWidth: 2,
                 color: function(context) {
                     if (context.tick.value <= 1) {
-                        return "rgba(0,0,0,0.5)";
+                        return "rgba(0,0,0,0.3)";
                     } else if (context.tick.value === 20) {
-                        return "rgba(0,0,0,0.5)";
+                        return "rgba(0,0,0,0.3)";
                     } else if (context.tick.value === 100) {
-                        return "rgba(0,0,0,0.5)";
+                        return "rgba(0,0,0,0.3)";
                     }
 
                     return "rgba(0,255,0,0)";;
